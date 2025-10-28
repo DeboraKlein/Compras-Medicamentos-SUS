@@ -1,0 +1,6 @@
+\# filter=lfs diff=lfs merge=lfs -text
+Rastreia filter=lfs diff=lfs merge=lfs -text
+seu filter=lfs diff=lfs merge=lfs -text
+arquivo filter=lfs diff=lfs merge=lfs -text
+grande filter=lfs diff=lfs merge=lfs -text
+*.csv filter=lfs diff=lfs merge=lfs -text

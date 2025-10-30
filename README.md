@@ -25,10 +25,10 @@ O produto final do pipeline é um conjunto de arquivos CSV (Star Schema) otimiza
 
 | Análise Principal | Screenshot |
 | :--- | :--- |
-| **Visão Gerencial de Preços** | [![Painel Gerencial](assets/pictures/visao_gerencial_precos.png)](assets/pictures/visao_gerencial_precos.png) |
-| **Auditoria de Preços (Z-Score)** | [![Detalhe do Z-Score] (URL_IMAGEM_2)] (URL_IMAGEM_2) |
-| **Análise de Demanda e Estoque** | [![Risco de Intermitência] (URL_IMAGEM_3)] (URL_IMAGEM_3) |
-| **Estrutura Dimensional (Star Schema)** | [![Estrutura Dimensional] (URL_IMAGEM_4)] (URL_IMAGEM_4) |
+| **Visão Gerencial de Preços** | [![Painel Gerencial Preços](assets/pictures/visao_gerencial_precos.png)](assets/pictures/visao_gerencial_precos.png) |
+| **Radar de Oportunidades** | [![Radar de Oportunidades] (assets/pictures/Radar_Oportunidades.png)] (assets/pictures/Radar_Oportunidades.png) |
+| **Visão Gerencial de Demanda** | [![Painel Gerencial Demanda] (assets/pictures/visao_gerencial_demanda.png] (assets/pictures/visao_gerencial_demanda.png) |
+| **Painel de Risco de Preço** | [![Estrutura Dimensional] (assets/pictures/Visao_Risco_Preco.png)] (assets/pictures/Visao_Risco_Preco.png) |
 
 ---
 

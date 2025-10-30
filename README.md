@@ -1,24 +1,46 @@
 #  Analytics de Compras Públicas de Medicamentos (2020-2025)
 
-##  Visão Geral do Projeto
+![Status do Pipeline](https://img.shields.io/badge/Status-Estável_e_Orquestrado-brightgreen)
+![Tecnologias](https://img.shields.io/badge/Stack-Python%20%7C%20Pandas%20%7C%20BI-blue)
+---
+
+##  1. Visão Geral e Justificativa Estratégica
 
 Este projeto implementa um **Pipeline de Engenharia de Dados (ETL)** robusto para transformar dados brutos e inconsistentes de Compras Públicas de Medicamentos (OpenDataSUS - BPS, 2020-2025) em um **Data Mart Analítico (Star Schema)**.
 
-O objetivo estratégico é fornecer à gestão pública indicadores de **Risco, Economicidade e Demanda**, essenciais para auditoria de preços e planejamento de suprimentos.
+O objetivo estratégico é fornecer à gestão pública indicadores acionáveis de **Risco, Economicidade e Demanda**, essenciais para auditoria de preços e planejamento de suprimentos.
 
 ---
 
-## A Solução: Data Engineering para Gestão de Risco
+##  2. Visualização e Resultados (Dashboard)
 
-O foco técnico do projeto está na **qualidade dos dados** e na **geração de indicadores avançados** de gestão, aplicando o ciclo **CRISP-DM** completo.
+O produto final do pipeline é um conjunto de arquivos CSV (Star Schema) otimizado para o Power BI, resultando em um dashboard de alta performance para a tomada de decisão.
+
+###  Acesse o Dashboard Online
+
+[![Dashboard Interativo (Power BI)](https://img.shields.io/badge/Acessar%20o%20Dashboard%20Online-E064A1?style=for-the-badge&logo=power-bi)](URL_DO_DASHBOARD_ONLINE)
+*(Clique para explorar a análise completa de risco e oportunidade.)*
+
+###  Screenshots Principais do Painel Analítico
+
+| Análise Principal | Screenshot |
+| :--- | :--- |
+| **Visão Gerencial de Risco** | [![Painel Gerencial] (URL_IMAGEM_1)] (URL_IMAGEM_1) |
+| **Auditoria de Preços (Z-Score)** | [![Detalhe do Z-Score] (URL_IMAGEM_2)] (URL_IMAGEM_2) |
+| **Análise de Demanda e Estoque** | [![Risco de Intermitência] (URL_IMAGEM_3)] (URL_IMAGEM_3) |
+| **Estrutura Dimensional (Star Schema)** | [![Estrutura Dimensional] (URL_IMAGEM_4)] (URL_IMAGEM_4) |
+
+---
+
+##  3. A Solução Técnica: Pipeline ETL & Feature Engineering
+
+O foco técnico do projeto está na **qualidade dos dados** e na **geração de indicadores avançados** de gestão, aplicando o ciclo **CRISP-DM** completo (Documentado na pasta `Notebooks/`).
 
 | Fase | Objetivo Central | Módulos Envolvidos |
 | :--- | :--- | :--- |
-| **ETL (Limpeza)** | Consolidar dados de múltiplos anos (2020-2025), corrigindo *schemas* instáveis, *encodings* variáveis e erros de formatação regional (R$). | `etl_compras_antigos.py`, `etl_compras.py` |
-| **Modelagem (Feature Engineering)**| Gerar indicadores estatísticos de risco de preço e intermitência de demanda. | `modelagem_dim.py` |
-| **Deployment (Orquestração)** | Entregar o produto final (Star Schema) pronto para consumo em BI (Power BI/Tableau). | `main.py`, `dimensoes.py` |
-
-
+| **ETL (Limpeza)** | Consolidar dados (2020-2025), corrigindo *schemas* instáveis, *encodings* e erros de formatação regional (R$). | `etl_compras_antigos.py`, `etl_compras.py` |
+| **Modelagem (Feature Engineering)**| Gerar indicadores estatísticos de risco de preço (**Z-Score**) e intermitência de demanda. | `modelagem_dim.py` |
+| **Deployment (Carga Final)** | Entregar o produto final (**Star Schema**) pronto para consumo em BI (Power BI/Tableau). | `main.py`, `dimensoes.py` |
 
 ### **Indicadores de Gestão (Key Features):**
 
@@ -29,7 +51,7 @@ O foco técnico do projeto está na **qualidade dos dados** e na **geração de 
 
 ---
 
-## Stack Tecnológico e Reprodutibilidade
+##  4. Stack Tecnológico e Reprodutibilidade
 
 | Categoria | Tecnologia | Uso no Projeto |
 | :--- | :--- | :--- |
@@ -40,42 +62,32 @@ O foco técnico do projeto está na **qualidade dos dados** e na **geração de 
 
 ### Estrutura do Repositório
 
-. 
-├── data/ 
+### Estrutura do Repositório e Funções Principais
 
-│ ├── raw/ # Arquivos CSV brutos (input) 
+A arquitetura do projeto segue um padrão modular com foco na separação de responsabilidades (ETL, Modelagem e Carga Dimensional).
 
-│ ├── processed/ # Arquivos CSV intermediários (consolidados) 
+| Arquivo/Pasta | Tipo | Função no Pipeline |
+| :--- | :--- | :--- |
+| **`main.py`** | Script | ⚡ **Orquestrador Central** (Ponto de Entrada): Coordena o fluxo completo (ETL -> Modelagem -> Carga). |
+| **`src/`** | Diretório | Contém a lógica de transformação do projeto. |
+| **`src/etl_compras*.py`** | Módulo | Rotinas robustas de limpeza, tratamento de encoding e consolidação dos dados de compras. |
+| **`src/modelagem_dim.py`**| Módulo | **Feature Engineering**: Criação de métricas de risco (Z-Score, PMP Mediano, Risco de Intermitência). |
+| **`src/dimensoes.py`** | Módulo | Responsável pela carga final do **Star Schema** (criação e salvamento das Tabelas Fato e Dimensões). |
+| **`Notebooks/`** | Diretório | Contém toda a **documentação do ciclo CRISP-DM** e validações técnicas do projeto. |
+| **`data/raw/`** | Diretório | **Input (Origem)**: Armazena os arquivos CSV brutos do OpenDataSUS. |
+| **`data/outputs/`** | Diretório | **Output (Deployment)**: Armazena o Star Schema (Fato e Dimensões) final para o BI. |
 
-│ └── outputs/ # Star Schema Final (output para BI) 
+##  5. Como Executar o Projeto
 
-├── src/ # Módulos Python com a lógica (ETL, Modelagem, Dimensões) 
+Para replicar e executar o pipeline completo, siga os passos abaixo no terminal/Git Bash.
 
-│ ├── etl_compras.py 
-
-│ ├── modelagem_dim.py 
-
-│ └── dimensoes.py 
-
-├── Notebooks/ # Documentação completa e validação (CRISP-DM) 
-
-├── main.py # Orquestrador Central do Pipeline 
-
-└── README.md
-
----
-
-##  Como Executar o Projeto
-
-Para replicar e executar o pipeline completo, siga os passos abaixo.
-
-### Pré-requisitos
+### 5.1. Pré-requisitos
 
 1.  Python 3.10+ instalado.
 2.  Gerenciador de pacotes `pip`.
-3.  Dados brutos (`.csv`s do OpenDataSUS) salvos na pasta `data/raw/`.
+3.  **Dados Brutos:** Arquivos `.csv` originais do OpenDataSUS salvos na pasta `data/raw/`.
 
-### 1. Instalação das Dependências
+### 5.2. Instalação das Dependências
 
 Crie um ambiente virtual (recomendado) e instale as bibliotecas:
 
@@ -88,33 +100,22 @@ source venv/bin/activate  # Linux/macOS
 pip install pandas numpy
 ```
 
-### 2. Execução do Pipeline Completo
+### 5.3 Execução do Pipeline
 
-O main.py executa o ETL (Limpeza, Consolidação), o Feature Engineering e a Carga Final (Deployment) em uma única linha:
+| Objetivo | Comando | 
+| :--- | :--- |
+| **Pipeline Completo (ETL + Modelagem + Carga)** | python main.py | 
+| **Execução Acelerada (Apenas Análises)** | python main.py --apenas-analises |
 
-```Bash
 
-python main.py
-```
+## 6. Próximos Passos (Roadmap de Evolução)
 
-### 3. Execução Acelerada (Apenas Análises)
-
-Se os dados já foram limpos e o arquivo consolidado existe, use a flag de análise:
-
-````Bash
-
-python main.py 
-
-````
-
-## Próximos Passos (Roadmap)
-
-Este projeto está pronto para a fase de Análise de Negócios (Power BI). As seguintes melhorias são planejadas para a evolução do sistema:
+O sistema está pronto para produção, mas o roadmap de evolução foca em automação e inteligência:
 
  - Integração com APIs: Automação da coleta de dados de referência (ex: CMED) via API para reduzir dependência de CSVs estáticos.
 
  - Módulo de IA: Inclusão de recursos de Inteligência Artificial Generativa para auxiliar o usuário na interpretação de outliers e legislação.
 
- - Monitoramento: Criação de uma página de auditoria e controle para monitorar a performance do pipeline e dos indicadores de gestão
+ - Monitoramento: Criação de uma página de auditoria e controle para monitorar a performance do pipeline e dos indicadores de gestão.
 
 

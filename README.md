@@ -25,7 +25,7 @@ O produto final do pipeline é um conjunto de arquivos CSV (Star Schema) otimiza
 
 | Análise Principal | Screenshot |
 | :--- | :--- |
-| **Visão Gerencial de Risco** | [![Painel Gerencial] (URL_IMAGEM_1)] (URL_IMAGEM_1) |
+| **Visão Gerencial de Preços** | [![Painel Gerencial](assets/pictures/Microsoft Power BI - Google Chrome 30_10_2025 19_39_33.png)](assets/pictures/Microsoft Power BI - Google Chrome 30_10_2025 19_39_33.png) |
 | **Auditoria de Preços (Z-Score)** | [![Detalhe do Z-Score] (URL_IMAGEM_2)] (URL_IMAGEM_2) |
 | **Análise de Demanda e Estoque** | [![Risco de Intermitência] (URL_IMAGEM_3)] (URL_IMAGEM_3) |
 | **Estrutura Dimensional (Star Schema)** | [![Estrutura Dimensional] (URL_IMAGEM_4)] (URL_IMAGEM_4) |
@@ -68,7 +68,7 @@ A arquitetura do projeto segue um padrão modular com foco na separação de res
 
 | Arquivo/Pasta | Tipo | Função no Pipeline |
 | :--- | :--- | :--- |
-| **`main.py`** | Script | ⚡ **Orquestrador Central** (Ponto de Entrada): Coordena o fluxo completo (ETL -> Modelagem -> Carga). |
+| **`main.py`** | Script |  **Orquestrador Central** (Ponto de Entrada): Coordena o fluxo completo (ETL -> Modelagem -> Carga). |
 | **`src/`** | Diretório | Contém a lógica de transformação do projeto. |
 | **`src/etl_compras*.py`** | Módulo | Rotinas robustas de limpeza, tratamento de encoding e consolidação dos dados de compras. |
 | **`src/modelagem_dim.py`**| Módulo | **Feature Engineering**: Criação de métricas de risco (Z-Score, PMP Mediano, Risco de Intermitência). |

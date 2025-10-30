@@ -18,7 +18,7 @@ O produto final do pipeline é um conjunto de arquivos CSV (Star Schema) otimiza
 
 ###  Acesse o Dashboard Online
 
-[![Dashboard Interativo (Power BI)](https://img.shields.io/badge/Acessar%20o%20Dashboard%20Online-E064A1?style=for-the-badge&logo=power-bi)](URL_DO_DASHBOARD_ONLINE)
+[![Dashboard Interativo (Power BI)](https://img.shields.io/badge/Acessar%20o%20Dashboard%20Online-2dede0?style=for-the-badge&logo=power-bi)]([URL_DO_DASHBOARD_ONLINE](https://app.powerbi.com/view?r=eyJrIjoiNzA5NWQzYjQtMGFhOS00MzU4LThhNWEtMGFhMTZjNmU2Y2ZmIiwidCI6IjY1OWNlMmI4LTA3MTQtNDE5OC04YzM4LWRjOWI2MGFhYmI1NyJ9))
 *(Clique para explorar a análise completa de risco e oportunidade.)*
 
 ###  Screenshots Principais do Painel Analítico

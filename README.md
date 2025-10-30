@@ -42,15 +42,25 @@ O foco técnico do projeto está na **qualidade dos dados** e na **geração de 
 
 . 
 ├── data/ 
+
 │ ├── raw/ # Arquivos CSV brutos (input) 
+
 │ ├── processed/ # Arquivos CSV intermediários (consolidados) 
+
 │ └── outputs/ # Star Schema Final (output para BI) 
+
 ├── src/ # Módulos Python com a lógica (ETL, Modelagem, Dimensões) 
+
 │ ├── etl_compras.py 
+
 │ ├── modelagem_dim.py 
+
 │ └── dimensoes.py 
+
 ├── Notebooks/ # Documentação completa e validação (CRISP-DM) 
+
 ├── main.py # Orquestrador Central do Pipeline 
+
 └── README.md
 
 ---

@@ -25,7 +25,7 @@ O produto final do pipeline é um conjunto de arquivos CSV (Star Schema) otimiza
 
 | Análise Principal | Screenshot |
 | :--- | :--- |
-| **Visão Gerencial de Preços** | [![Painel Gerencial](assets/pictures/Microsoft Power BI - Google Chrome 30_10_2025 19_39_33.png)](assets/pictures/Microsoft Power BI - Google Chrome 30_10_2025 19_39_33.png) |
+| **Visão Gerencial de Preços** | [![Painel Gerencial](assets/pictures/visao_gerencial_precos.png)](assets/pictures/visao_gerencial_precos.png) |
 | **Auditoria de Preços (Z-Score)** | [![Detalhe do Z-Score] (URL_IMAGEM_2)] (URL_IMAGEM_2) |
 | **Análise de Demanda e Estoque** | [![Risco de Intermitência] (URL_IMAGEM_3)] (URL_IMAGEM_3) |
 | **Estrutura Dimensional (Star Schema)** | [![Estrutura Dimensional] (URL_IMAGEM_4)] (URL_IMAGEM_4) |

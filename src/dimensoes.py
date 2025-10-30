@@ -25,7 +25,7 @@ def criar_e_integrar_dimensoes(df_fato: pd.DataFrame, pasta_outputs: str) -> pd.
         
         # 2. Criar a Chave Primária (Surrogate Key - SK) com prefixo
         # O padrão {:05d} garante 5 dígitos, preenchendo com zeros à esquerda.
-        # 🟢 CORREÇÃO: Converter (df_dim.index + 1) em uma Series para permitir o .apply()
+        #  CORREÇÃO: Converter (df_dim.index + 1) em uma Series para permitir o .apply()
         indices_sequenciais = pd.Series(df_dim.index + 1)
 
         df_dim[chave_primaria] = (
@@ -35,7 +35,7 @@ def criar_e_integrar_dimensoes(df_fato: pd.DataFrame, pasta_outputs: str) -> pd.
         # 3. Reordenar e Exportar
         df_dim = df_dim[[chave_primaria] + colunas_atributos]
         df_dim.to_csv(f"{pasta_outputs}/dim_{nome_dim}.csv", index=False, sep=';', encoding='utf-8-sig')
-        logger.info(f"✅ Dimensão {nome_dim.capitalize()} criada ({len(df_dim):,} registros, Ex: {df_dim[chave_primaria].iloc[0]}) e exportada.")
+        logger.info(f" Dimensão {nome_dim.capitalize()} criada ({len(df_dim):,} registros, Ex: {df_dim[chave_primaria].iloc[0]}) e exportada.")
         
         # 4. Integrar (Merge)
         df_fato_integrada = pd.merge(
@@ -68,17 +68,17 @@ def criar_e_integrar_dimensoes(df_fato: pd.DataFrame, pasta_outputs: str) -> pd.
     if all(col in df_fato.columns for col in col_forn):
         df_fato = _criar_dimensao(df_fato, 'fornecedor', col_forn, 'id_fornecedor', 'For')
     else:
-        logger.warning(f"⚠️ Colunas de Fornecedor ({', '.join(col_forn)}) não encontradas. Dimensão pulada.")
+        logger.warning(f" Colunas de Fornecedor ({', '.join(col_forn)}) não encontradas. Dimensão pulada.")
         
     # 4. DIMENSÃO FABRICANTE
     col_fabr = ['cnpj_fabricante', 'fabricante']
     if all(col in df_fato.columns for col in col_fabr):
         df_fato = _criar_dimensao(df_fato, 'fabricante', col_fabr, 'id_fabricante', 'Fab')
     else:
-        logger.warning(f"⚠️ Colunas de Fabricante ({', '.join(col_fabr)}) não encontradas. Dimensão pulada.")
+        logger.warning(f" Colunas de Fabricante ({', '.join(col_fabr)}) não encontradas. Dimensão pulada.")
 
     # 5. DIMENSÃO TEMPO (Mantém o padrão AAAA/MM/DD, que já é descritivo e único)
-    logger.info("⏳ Criando Dimensão Tempo/Data...")
+    logger.info(" Criando Dimensão Tempo/Data...")
     col_tempo = ['compra'] 
     
     try:
@@ -109,16 +109,16 @@ def criar_e_integrar_dimensoes(df_fato: pd.DataFrame, pasta_outputs: str) -> pd.
         
         chaves_dimensao.append('id_tempo')
         
-        logger.info(f"✅ Dimensão Tempo criada ({len(dim_tempo):,} registros, Ex: {dim_tempo['id_tempo'].iloc[0]}) e integrada.")
+        logger.info(f" Dimensão Tempo criada ({len(dim_tempo):,} registros, Ex: {dim_tempo['id_tempo'].iloc[0]}) e integrada.")
         dim_tempo.to_csv(f"{pasta_outputs}/dim_tempo.csv", index=False, sep=';', encoding='utf-8-sig')
         
     except Exception as e:
-        logger.error(f"❌ Erro ao processar Dimensão Tempo: {e}")
+        logger.error(f" Erro ao processar Dimensão Tempo: {e}")
         # Se falhar, renomeamos a coluna de volta para 'compra'
         df_fato.rename(columns={'data_compra': 'compra'}, inplace=True, errors='ignore')
 
     
-    logger.info("🎉 Criação de dimensões e integração à Fato concluída.")
+    logger.info(" Criação de dimensões e integração à Fato concluída.")
     
     # 6. FINALIZAÇÃO DA FATO: Reordena as chaves de Dimensão e as colunas de contexto
     

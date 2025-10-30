@@ -81,11 +81,11 @@ def calcular_risco_intermitencia(df: pd.DataFrame) -> pd.DataFrame:
     
     # 1. Preparação da Data
     if COLUNA_DATA not in df.columns:
-         logger.error(f"❌ Coluna '{COLUNA_DATA}' para intermitência não encontrada. Pulando cálculo.")
+         logger.error(f" Coluna '{COLUNA_DATA}' para intermitência não encontrada. Pulando cálculo.")
          return df
          
     if not pd.api.types.is_datetime64_any_dtype(df[COLUNA_DATA]):
-        logger.warning(f"⚠️ Coluna '{COLUNA_DATA}' não é datetime. Tentando conversão...")
+        logger.warning(f" Coluna '{COLUNA_DATA}' não é datetime. Tentando conversão...")
         df[COLUNA_DATA] = pd.to_datetime(df[COLUNA_DATA], errors='coerce')
         
     df['mes_compra'] = df[COLUNA_DATA].dt.to_period('M')
@@ -98,7 +98,7 @@ def calcular_risco_intermitencia(df: pd.DataFrame) -> pd.DataFrame:
     mes_min = df['mes_compra'].min()
     mes_max = df['mes_compra'].max()
     if pd.isna(mes_min) or pd.isna(mes_max):
-         logger.error("❌ Não foi possível determinar o período. Pulando Intermitência.")
+         logger.error(" Não foi possível determinar o período. Pulando Intermitência.")
          return df
 
     periodo_total_meses = (mes_max.year - mes_min.year) * 12 + mes_max.month - mes_min.month + 1
@@ -119,7 +119,7 @@ def calcular_risco_intermitencia(df: pd.DataFrame) -> pd.DataFrame:
     )
     
     df.drop(columns=['mes_compra'], inplace=True, errors='ignore')
-    logger.info("✅ Risco de Intermitência (Instabilidade de Demanda) calculado.")
+    logger.info(" Risco de Intermitência (Instabilidade de Demanda) calculado.")
     return df
 
 
@@ -132,7 +132,7 @@ def calcular_concentracao_fornecedor(df: pd.DataFrame) -> pd.DataFrame:
     Calcula o percentual de gasto de um produto que está concentrado
     no seu principal fornecedor, sinalizando risco de dependência (Demanda).
     """
-    logger.info("⏳ Calculando Risco de Concentração de Fornecedor...")
+    logger.info(" Calculando Risco de Concentração de Fornecedor...")
     
     gasto_col = 'preco_total'
     
@@ -168,7 +168,7 @@ def calcular_concentracao_fornecedor(df: pd.DataFrame) -> pd.DataFrame:
         how='left'
     )
     
-    logger.info("✅ Risco de Concentração de Fornecedor calculado.")
+    logger.info(" Risco de Concentração de Fornecedor calculado.")
     return df
 
 
@@ -181,11 +181,11 @@ def calcular_indice_priorizacao(df: pd.DataFrame) -> pd.DataFrame:
     Calcula e normaliza o Índice de Priorização para a Gestão de Demanda,
     combinando o Risco de Preço (Z-Score Absoluto) com o Valor Gasto (Demanda).
     """
-    logger.info("⏳ Aplicando etapa de Priorização: Cálculo do Índice de Gestão da Demanda...")
+    logger.info(" Aplicando etapa de Priorização: Cálculo do Índice de Gestão da Demanda...")
 
     # id_produto (para agrupar), preco_total (para demanda), score_z_risco (para risco)
     if not all(col in df.columns for col in ['id_produto', 'preco_total', 'score_z_risco']):
-        logger.error("❌ Colunas essenciais ('id_produto', 'preco_total', 'score_z_risco') para Priorização não encontradas. Pulando cálculo.")
+        logger.error(" Colunas essenciais ('id_produto', 'preco_total', 'score_z_risco') para Priorização não encontradas. Pulando cálculo.")
         return df
 
     # 1. Agrupar os dados por Produto (id_produto)
@@ -234,7 +234,7 @@ def calcular_indice_priorizacao(df: pd.DataFrame) -> pd.DataFrame:
     df['indice_priorizacao'] = df['indice_priorizacao'].fillna(0)
     df['demanda_valor'] = df['demanda_valor'].fillna(0)
     
-    logger.info("✅ Colunas 'indice_priorizacao' e 'demanda_valor' adicionadas à Fato.")
+    logger.info(" Colunas 'indice_priorizacao' e 'demanda_valor' adicionadas à Fato.")
     return df
 
 # ==============================================================================
@@ -283,27 +283,27 @@ def gerar_id_pedido(df: pd.DataFrame) -> pd.DataFrame:
     for col in colunas_para_dropar:
         if col in df.columns:
             df.drop(columns=[col], inplace=True)
-            logger.info(f"🗑️ Coluna residual '{col}' removida.")
+            logger.info(f" Coluna residual '{col}' removida.")
             colunas_removidas += 1
     if colunas_removidas == 0:
-        logger.info("👍 Nenhuma coluna residual a ser dropada.")
+        logger.info(" Nenhuma coluna residual a ser dropada.")
 
-    # 🚨 CHAMADA À FUNÇÃO DE CÁLCULO DE Z-SCORE
+    #  CHAMADA À FUNÇÃO DE CÁLCULO DE Z-SCORE
     df = calcular_zscore_risco(df)
     
     if 'compra' in df.columns and 'codigo_br' in df.columns:
         df = df.sort_values(by=['compra', 'codigo_br'], ascending=True).reset_index(drop=True)
-        logger.info(f"✅ Registros ordenados por data ('compra') e código do item ('codigo_br').")
+        logger.info(f" Registros ordenados por data ('compra') e código do item ('codigo_br').")
     elif 'compra' in df.columns:
         df = df.sort_values(by=['compra'], ascending=True).reset_index(drop=True)
-        logger.info(f"✅ Registros ordenados por data ('compra').")
+        logger.info(f" Registros ordenados por data ('compra').")
 
     if 'id_pedido' in df.columns:
         colunas = ['id_pedido'] + [col for col in df.columns if col != 'id_pedido']
         df = df[colunas]
-        logger.info(f"✅ Coluna 'id_pedido' gerada e reordenada.")
+        logger.info(f" Coluna 'id_pedido' gerada e reordenada.")
     
-    logger.info(f"✅ Modelagem concluída. Total de registros: {len(df):,}")
+    logger.info(f" Modelagem concluída. Total de registros: {len(df):,}")
     
     return df
 
@@ -382,7 +382,7 @@ def gerar_mini_fato_radar_enriquecida(df_fato: pd.DataFrame) -> pd.DataFrame:
         'PMP_Mediano_Dinamico': 'PMP_Benchmark_Referencia' 
     }, inplace=True)
     
-    logger.info(f"✅ Mini Tabela Fato Enriquecida gerada com {len(radar_final):,} transações, usando PMP Mediano como benchmark.")
+    logger.info(f" Mini Tabela Fato Enriquecida gerada com {len(radar_final):,} transações, usando PMP Mediano como benchmark.")
     
     return radar_final
 

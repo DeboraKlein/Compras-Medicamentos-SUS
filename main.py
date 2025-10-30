@@ -171,7 +171,11 @@ def main():
     print(f" Tabela Fato exportada: {arquivo_fato}")
 
     # 12. ESTATÍSTICAS E RELATÓRIO FINAL
+<<<<<<< HEAD
     print(f"\n🎉 PROCESSAMENTO CONCLUÍDO!")
+=======
+    print(f"\n PROCESSAMENTO CONCLUÍDO!")
+>>>>>>> eaf751dea033b4bc6c762276290d7bb0ea8c873a
     print(f"    Total de registros: {len(df_final):,}")
 
     # 13. Estatísticas básicas
@@ -209,10 +213,17 @@ def main():
             print(f" Gasto total: R$ {total_gasto:,.2f}")
         if anos_unicos:
              print(f" Média anual: R$ {total_gasto/len(anos_unicos):,.2f}")
+<<<<<<< HEAD
 
         if 'uf' in df_final.columns:
             print(f" Estados: {df_final['uf'].nunique()}")
 
+=======
+    
+        if 'uf' in df_final.columns:
+            print(f" Estados: {df_final['uf'].nunique()}")
+    
+>>>>>>> eaf751dea033b4bc6c762276290d7bb0ea8c873a
         if 'municipio_instituicao' in df_final.columns:
             print(f" Municípios: {df_final['municipio_instituicao'].nunique()}")
     

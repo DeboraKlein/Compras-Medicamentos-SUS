@@ -38,7 +38,7 @@ class ETLComprasAntigos:
     
     # Padroniza nomes de colunas de ANOS ANTIGOS para snake_case do NOVO formato.    
     def _padronizar_colunas(self, df): 
-        self.logger.info("🔧 Padronizando nomes de colunas...")
+        self.logger.info(" Padronizando nomes de colunas...")
         
         # Lista de colunas a serem limpas (removendo espaços e caracteres extras)
         df.columns = df.columns.str.strip().str.replace(' ', '_').str.replace('__', '_')
@@ -82,7 +82,7 @@ class ETLComprasAntigos:
     # Corrige a inversão de CNPJ e Nome que acontece em alguns anos antigos.
     def _corrigir_colunas_trocadas(self, df):
         
-        self.logger.info("🔧 Corrigindo colunas CNPJ/Nome trocadas...")
+        self.logger.info(" Corrigindo colunas CNPJ/Nome trocadas...")
         
         # Lógica de amostra para determinar se a coluna temp_cnpj realmente é o nome (se tem mais letras)
         def is_name(series):
@@ -95,7 +95,7 @@ class ETLComprasAntigos:
         # Fornecedor
         if 'cnpj_fornecedor_temp' in df.columns and 'fornecedor_temp' in df.columns:
             if is_name(df['cnpj_fornecedor_temp']):
-                self.logger.info("   ⚠️ Inversão de Fornecedor detectada e corrigida.")
+                self.logger.info("    Inversão de Fornecedor detectada e corrigida.")
                 df['fornecedor'] = df['cnpj_fornecedor_temp']
                 df['cnpj_fornecedor'] = df['fornecedor_temp']
             else:
@@ -106,7 +106,7 @@ class ETLComprasAntigos:
         # Fabricante
         if 'cnpj_fabricante_temp' in df.columns and 'fabricante_temp' in df.columns:
             if is_name(df['cnpj_fabricante_temp']):
-                self.logger.info("   ⚠️ Inversão de Fabricante detectada e corrigida.")
+                self.logger.info("    Inversão de Fabricante detectada e corrigida.")
                 df['fabricante'] = df['cnpj_fabricante_temp']
                 df['cnpj_fabricante'] = df['fabricante_temp']
             else:
@@ -117,7 +117,7 @@ class ETLComprasAntigos:
         # Instituição
         if 'cnpj_instituicao_temp' in df.columns and 'nome_instituicao_temp' in df.columns:
             if is_name(df['cnpj_instituicao_temp']):
-                self.logger.info("   ⚠️ Inversão de Instituição detectada e corrigida.")
+                self.logger.info("    Inversão de Instituição detectada e corrigida.")
                 df['nome_instituicao'] = df['cnpj_instituicao_temp']
                 df['cnpj_instituicao'] = df['nome_instituicao_temp']
             else:

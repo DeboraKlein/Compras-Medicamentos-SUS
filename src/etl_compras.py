@@ -145,7 +145,7 @@ class ETLComprasPublicas:
                 .fillna('NÃO')
             )
 
-        self.logger.info("✅ Correções aplicadas com sucesso")
+        self.logger.info(" Correções aplicadas com sucesso")
         return df
 
     # Processa um único arquivo CSV
@@ -167,7 +167,7 @@ class ETLComprasPublicas:
                 self.logger.error(f"Erro ao carregar arquivo tratado: {e}")
                 return None
 
-        self.logger.info(f"🎯 Iniciando processamento de: {nome_arquivo}")
+        self.logger.info(f" Iniciando processamento de: {nome_arquivo}")
 
         # 1. Leitura flexível
         df = self._ler_arquivo_flexivel(caminho_arquivo)
@@ -175,12 +175,12 @@ class ETLComprasPublicas:
             self.logger.error(f"Falha ao ler arquivo: {nome_arquivo}")
             return None
 
-        self.logger.info(f"✅ Arquivo lido com {len(df)} registros e {len(df.columns)} colunas")
+        self.logger.info(f" Arquivo lido com {len(df)} registros e {len(df.columns)} colunas")
 
         # 2. Correções específicas
         df_tratado = self._corrigir_problemas_especificos(df)
         if df_tratado is None or df_tratado.empty:
-            self.logger.error(f"❌ Tratamento falhou para: {nome_arquivo}")
+            self.logger.error(f" Tratamento falhou para: {nome_arquivo}")
             return None
 
         # 3. Garante coluna de ano
@@ -190,7 +190,7 @@ class ETLComprasPublicas:
         # 4. Salva arquivo tratado
         try:
             df_tratado.to_csv(arquivo_saida, index=False, encoding='utf-8-sig')
-            self.logger.info(f"💾 Arquivo tratado salvo: {arquivo_saida} ({len(df_tratado)} registros)")
+            self.logger.info(f" Arquivo tratado salvo: {arquivo_saida} ({len(df_tratado)} registros)")
         except Exception as e:
             self.logger.error(f"Erro ao salvar arquivo tratado: {e}")
             return None
@@ -203,7 +203,7 @@ class ETLComprasPublicas:
 
         arquivos = self.listar_arquivos_raw()
         if not arquivos:
-            self.logger.error("❌ Nenhum arquivo CSV encontrado.")
+            self.logger.error(" Nenhum arquivo CSV encontrado.")
             self.logger.error(f"Coloque os arquivos .csv em: {self.pasta_raw}")
             return None
 
@@ -215,7 +215,7 @@ class ETLComprasPublicas:
                 df_ano = self.processar_arquivo_individual(arquivo, forcar_reprocessamento)
 
                 if df_ano is None or df_ano.empty:
-                    self.logger.warning(f"⚠️ Ignorado: {os.path.basename(arquivo)} — DataFrame vazio ou falha no processamento.")
+                    self.logger.warning(f" Ignorado: {os.path.basename(arquivo)} — DataFrame vazio ou falha no processamento.")
                     continue
 
                 # Verificações adicionais
@@ -223,21 +223,21 @@ class ETLComprasPublicas:
                 colunas_faltando = [col for col in colunas_esperadas if col not in df_ano.columns]
 
                 if colunas_faltando:
-                    self.logger.warning(f"⚠️ Ignorado: {os.path.basename(arquivo)} — Colunas ausentes: {colunas_faltando}")
+                    self.logger.warning(f" Ignorado: {os.path.basename(arquivo)} — Colunas ausentes: {colunas_faltando}")
                     continue
 
                 # Adiciona ao consolidado
                 todos_dados.append(df_ano)
                 ano = self.extrair_ano_do_arquivo(arquivo)
                 anos_processados.append(ano)
-                self.logger.info(f"✅ {ano}: {len(df_ano):,} registros processados")
+                self.logger.info(f" {ano}: {len(df_ano):,} registros processados")
 
             except Exception as e:
-                self.logger.error(f"❌ Erro ao processar {os.path.basename(arquivo)}: {e}")
+                self.logger.error(f" Erro ao processar {os.path.basename(arquivo)}: {e}")
                 continue
 
         if not todos_dados:
-            self.logger.error("❌ Nenhum dado foi processado com sucesso.")
+            self.logger.error(" Nenhum dado foi processado com sucesso.")
             return None
 
         # Consolida os dados
@@ -259,10 +259,10 @@ class ETLComprasPublicas:
 
         try:
             df_consolidado.to_csv(arquivo_consolidado, index=False, encoding='utf-8-sig')
-            self.logger.info("🎉 Consolidação completa!")
-            self.logger.info(f"📈 Total de registros: {len(df_consolidado):,}")
-            self.logger.info(f"📅 Período: {anos_str}")
-            self.logger.info(f"💾 Arquivo salvo: {arquivo_consolidado}")
+            self.logger.info(" Consolidação completa!")
+            self.logger.info(f" Total de registros: {len(df_consolidado):,}")
+            self.logger.info(f" Período: {anos_str}")
+            self.logger.info(f" Arquivo salvo: {arquivo_consolidado}")
         except Exception as e:
             self.logger.error(f"Erro ao salvar arquivo consolidado: {e}")
             return None
@@ -304,12 +304,12 @@ class ETLComprasPublicas:
             stats_path = os.path.join(self.pasta_outputs, f"estatisticas_consolidadas_{anos_str}.csv")
 
             stats_df.to_csv(stats_path, index=False, encoding='utf-8-sig')
-            self.logger.info("📊 Estatísticas consolidadas geradas com sucesso:")
+            self.logger.info(" Estatísticas consolidadas geradas com sucesso:")
             for key, value in stats.items():
                 self.logger.info(f"   {key}: {value}")
 
         except Exception as e:
-            self.logger.error(f"❌ Erro ao gerar estatísticas: {e}")
+            self.logger.error(f" Erro ao gerar estatísticas: {e}")
 
 
 # --- FUNÇÃO DE FACILIDADE---
@@ -322,20 +322,20 @@ def processar_tudo(pasta_dados="data", forcar_reprocessamento=False):
 
 if __name__ == "__main__":
     print("=" * 60)
-    print("🏥 ETL - COMPRAS PÚBLICAS DE MEDICAMENTOS")
+    print(" ETL - COMPRAS PÚBLICAS DE MEDICAMENTOS")
     print("=" * 60)
 
     try:
         df_final = processar_tudo(forcar_reprocessamento=True)
 
         if df_final is not None and not df_final.empty:
-            print(f"\n✅ PROCESSAMENTO COMPLETO! {len(df_final):,} registros consolidados.")
+            print(f"\n PROCESSAMENTO COMPLETO! {len(df_final):,} registros consolidados.")
         else:
-            print("\n❌ FALHA NO PROCESSAMENTO.")
+            print("\n FALHA NO PROCESSAMENTO.")
             print("Verifique:")
             print("1. Se os arquivos CSV estão em: data/raw/")
             print("2. Se os nomes dos arquivos contêm o ano (ex: 2025.csv)")
 
     except Exception as e:
-        print("\n🚨 ERRO CRÍTICO DURANTE A EXECUÇÃO DO ETL")
+        print("\n ERRO CRÍTICO DURANTE A EXECUÇÃO DO ETL")
         print(f"Detalhes: {e}")

@@ -12,7 +12,7 @@ def criar_e_integrar_dimensoes(df_fato: pd.DataFrame, pasta_outputs: str) -> pd.
     Cria as tabelas dimensão (Instituição, Produto, Tempo, Fornecedor, Fabricante) a partir da Tabela Fato
     e integra suas chaves primárias (Surrogate Keys) de volta na Fato, usando prefixos intuitivos.
     """
-    logger.info("🎬 Iniciando a criação e integração das Tabelas Dimensão com prefixos...")
+    logger.info(" Iniciando a criação e integração das Tabelas Dimensão com prefixos...")
     
     # Lista para armazenar as chaves de dimensão criadas para reordenação final
     chaves_dimensao = ['id_pedido']

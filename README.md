@@ -116,10 +116,10 @@ O sistema está pronto para produção, mas o roadmap de evolução foca em auto
 
 - Winsorização Dinâmica: Caso o projeto evolua para fontes de dados em tempo real, recomenda-se implementar winsorização automática no Python para adaptar limites  estatísticos conforme a distribuição dos dados muda
 
-        **Para Dados Estáticos (Cenário Atual):**
+            Para Dados Estáticos (Cenário Atual):
             Limite fixo no DAX (Z-Score ≤ 6) - Solução atual otimizada
 
-        **Para Dados Dinâmicos via API (Futuro):**
+            Para Dados Dinâmicos via API (Futuro):
             - Winsorização automática no Python (`modelagem_dim.py`)
             - Adaptação contínua dos limites baseada em percentis estatísticos
             - Monitoramento de drift de distribuição

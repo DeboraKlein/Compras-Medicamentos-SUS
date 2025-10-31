@@ -112,10 +112,20 @@ pip install pandas numpy
 
 O sistema está pronto para produção, mas o roadmap de evolução foca em automação e inteligência:
 
- - Integração com APIs: Automação da coleta de dados de referência (ex: CMED) via API para reduzir dependência de CSVs estáticos.
+- Integração com APIs: Automação da coleta de dados de referência (ex: CMED) via API para reduzir dependência de CSVs estáticos.
 
- - Módulo de IA: Inclusão de recursos de Inteligência Artificial Generativa para auxiliar o usuário na interpretação de outliers e legislação.
+- Winsorização Dinâmica: Caso o projeto evolua para fontes de dados em tempo real, recomenda-se implementar winsorização automática no Python para adaptar limites  estatísticos conforme a distribuição dos dados muda
 
- - Monitoramento: Criação de uma página de auditoria e controle para monitorar a performance do pipeline e dos indicadores de gestão.
+        **Para Dados Estáticos (Cenário Atual):**
+            Limite fixo no DAX (Z-Score ≤ 6) - Solução atual otimizada
+
+        **Para Dados Dinâmicos via API (Futuro):**
+            - Winsorização automática no Python (`modelagem_dim.py`)
+            - Adaptação contínua dos limites baseada em percentis estatísticos
+            - Monitoramento de drift de distribuição
+
+- Módulo de IA: Inclusão de recursos de Inteligência Artificial Generativa para auxiliar o usuário na interpretação de outliers e legislação.
+
+- Monitoramento: Criação de uma página de auditoria e controle para monitorar a performance do pipeline e dos indicadores de gestão.
 
 

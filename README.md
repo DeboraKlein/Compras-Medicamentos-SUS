@@ -1,4 +1,14 @@
-#  Analytics de Compras Públicas de Medicamentos (2020-2025)
+#  Pipeline ETL/ELT Profissional: Inteligência de Risco em Compras Públicas de Medicamentos
+
+O objetivo principal deste projeto é transformar dados públicos brutos e não estruturados de aquisições de medicamentos (2020-2025) em um Data Mart Analítico (Star Schema).
+
+O pipeline de Engenharia de Dados em Python aborda desafios como inconsistência de encoding, desvios de tipagem e a alta redundância de dados, entregando:
+
+Governança de Dados: Implementação de um Star Schema (fato_compras e dimensões), garantindo alta performance para consultas em ferramentas de BI (Power BI/Tableau).
+
+Análise de Risco: Cálculo de métricas avançadas (Feature Engineering) como o PMP Mediano Dinâmico, Z-Score de Risco e Índice de Priorização, permitindo identificar transações com sobrepreço e riscos na cadeia de suprimentos.
+
+Reprodutibilidade: Orquestração completa via main.py com alta modularidade.
 
 ![Status do Pipeline](https://img.shields.io/badge/Status-Estável_e_Orquestrado-brightgreen)
 ![Tecnologias](https://img.shields.io/badge/Stack-Python%20%7C%20Pandas%20%7C%20BI-blue)

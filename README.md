@@ -136,6 +136,16 @@ O sistema está pronto para produção, mas o roadmap de evolução foca em auto
 
 - Módulo de IA: Inclusão de recursos de Inteligência Artificial Generativa para auxiliar o usuário na interpretação de outliers e legislação.
 
-- Monitoramento: Criação de uma página de auditoria e controle para monitorar a performance do pipeline e dos indicadores de gestão.
+- Monitoramento: Criação de uma página de auditoria e controle para monitorar a performance do pipeline e dos indicadores de auditoria.
 
+- Análise de Ociosidade: Criar uma página dedicada no Dashboard para visualizar a Ociosidade.
 
+    Objetivo: Criar oportunidade de revisão do catálogo de produtos e a descontinuação de itens obsoletos. Avaliar parcerias estratégicas e aumentar a competitividade".
+
+        Insights Chave para o Dashboard:
+
+        - 47.6% dos produtos (10.114 itens) não foram comprados no período. 
+
+        - 35.1% dos fornecedores (1.685 entidades) estão inativos.
+
+        Os achados de ociosidade validam a Regra de Pareto, na página de Gestão da Demanda do dashboard, onde os produtos são avaliados pelo total gasto. Apenas 11.143 produtos concentram R$ 75,2 Bilhões em gastos.

@@ -144,8 +144,6 @@ O sistema está pronto para produção, mas o roadmap de evolução foca em auto
 
         Insights Chave para o Dashboard:
 
-        - 47.6% dos produtos (10.114 itens) não foram comprados no período. 
+        - 47.6% dos produtos (10.114 itens) com volume de compras muito baixos. 
 
-        - 35.1% dos fornecedores (1.685 entidades) estão inativos.
-
-        Os achados de ociosidade validam a Regra de Pareto, na página de Gestão da Demanda do dashboard, onde os produtos são avaliados pelo total gasto. Apenas 11.143 produtos concentram R$ 75,2 Bilhões em gastos.
+    Os achados de ociosidade validam a Regra de Pareto, na página de Gestão da Demanda do dashboard, onde os produtos são avaliados pelo total gasto. Apenas 11.143 produtos concentram R$ 75,2 Bilhões em gastos.
